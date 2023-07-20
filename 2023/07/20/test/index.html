@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言在写公司项目的时候有一个需求：要将多个文件一次性上传。我使用的是element的upload组件，但是upload的组件默认是一个文件上传一次。下面是多文件一次上传的方法（只发送一次请求） 1、从upload组件copy下来修改一下这里我copy的是upload中‘手动上传’代码。可以在Element-ui-Upload上传中找到由于我们不需要默认上传，所以我们在&lt;el-upload&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="test">
+<meta property="og:url" content="http://example.com/2023/07/20/test/index.html">
+<meta property="og:site_name" content="Yado Blog">
+<meta property="og:description" content="前言在写公司项目的时候有一个需求：要将多个文件一次性上传。我使用的是element的upload组件，但是upload的组件默认是一个文件上传一次。下面是多文件一次上传的方法（只发送一次请求） 1、从upload组件copy下来修改一下这里我copy的是upload中‘手动上传’代码。可以在Element-ui-Upload上传中找到由于我们不需要默认上传，所以我们在&lt;el-upload&amp;g">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21b78d12562049d0aedff0953767011b~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/445243673ec247849e3a39ed58f9d1b4~tplv-k3u1fbpfcp-watermark.image">
+<meta property="article:published_time" content="2023-07-20T03:14:40.000Z">
+<meta property="article:modified_time" content="2023-07-20T03:15:02.735Z">
+<meta property="article:author" content="Yado">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21b78d12562049d0aedff0953767011b~tplv-k3u1fbpfcp-watermark.image">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>test</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/07/18/hello-world/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/07/20/test/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/07/20/test/&text=test"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/07/20/test/&is_video=false&description=test"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=test&body=Check out this article: http://example.com/2023/07/20/test/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/07/20/test/&name=test&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/07/20/test/&t=test"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E4%BB%8Eupload%E7%BB%84%E4%BB%B6copy%E4%B8%8B%E6%9D%A5%E4%BF%AE%E6%94%B9%E4%B8%80%E4%B8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1、从upload组件copy下来修改一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81data%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">2、data中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E7%A1%AE%E8%AE%A4%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6%EF%BC%88%E5%89%8D%E5%8D%8A%E6%AE%B5%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">3、确认按钮事件（前半段）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81uploadFile%E8%A6%86%E7%9B%96%E9%BB%98%E8%AE%A4%E4%B8%8A%E4%BC%A0%E8%A1%8C%E4%B8%BA"><span class="toc-number">1.4.</span> <span class="toc-text">4、uploadFile覆盖默认上传行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81-%E7%A1%AE%E8%AE%A4%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6%EF%BC%88%E5%90%8E%E5%8D%8A%E6%AE%B5%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">5、 确认按钮事件（后半段）</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        test
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Yado</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-07-20T03:14:40.000Z" class="dt-published" itemprop="datePublished">2023-07-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在写公司项目的时候有一个需求：要将多个文件一次性上传。我使用的是element的upload组件，但是upload的组件默认是一个文件上传一次。下面是多文件一次上传的方法（只发送一次请求）</p>
+<h2 id="1、从upload组件copy下来修改一下"><a href="#1、从upload组件copy下来修改一下" class="headerlink" title="1、从upload组件copy下来修改一下"></a>1、从upload组件copy下来修改一下</h2><p>这里我copy的是upload中‘手动上传’代码。可以在Element-ui-Upload上传中找到<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21b78d12562049d0aedff0953767011b~tplv-k3u1fbpfcp-watermark.image" alt="image.png"><br>由于我们不需要默认上传，所以我们在<code>&lt;el-upload&gt;</code>中做一些修改：<br><br>1）将<code>action</code>设置为空串<br><br>2）将<code>auto-upload</code>设置为<code>false</code>，此改动可以让选取文件后不立即上传<br><br>3）设置<code>http-request</code>，此属性是用于覆盖element默认的上传行为<br><br>如果我说的不是很明白或者对其他属性有疑惑的话，可以去看看upload的文档</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload</span><br><span class="line">    ref=<span class="string">&quot;upload&quot;</span></span><br><span class="line">    action=<span class="string">&quot;&quot;</span>  <span class="comment">//aciton设置为空</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;upload-demo&quot;</span></span><br><span class="line">    :on-change=<span class="string">&quot;onChange&quot;</span></span><br><span class="line">    :before-upload=<span class="string">&quot;beforeUpload&quot;</span></span><br><span class="line">    <span class="attr">multiple</span></span><br><span class="line">    :limit=<span class="string">&quot;5&quot;</span>  <span class="comment">//最大上传个数</span></span><br><span class="line">    :on-exceed=<span class="string">&quot;handleExceed&quot;</span></span><br><span class="line">    :file-list=<span class="string">&quot;fileList&quot;</span></span><br><span class="line">    :http-request=<span class="string">&quot;uploadFile&quot;</span>  <span class="comment">//覆盖默认的上传行为</span></span><br><span class="line">    :auto-upload=<span class="string">&quot;false&quot;</span>  <span class="comment">//设置文件不立即上传&gt;</span></span><br><span class="line">    &lt;el-button size=<span class="string">&quot;mini&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;uploadBtn&quot;</span>&gt;选择文件&lt;/el-button&gt;</span><br><span class="line">&lt;/el-upload&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2、data中的数据"><a href="#2、data中的数据" class="headerlink" title="2、data中的数据"></a>2、data中的数据</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">formDate</span>: <span class="string">&#x27;&#x27;</span>, <span class="comment">//载体</span></span><br><span class="line">        <span class="attr">fileList</span>: [] <span class="comment">//展示的文件列表</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的<code>fileLIst</code>是显示在界面的列表（如下图所示）</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/445243673ec247849e3a39ed58f9d1b4~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>主要是这个<code>formData</code>，它是载体。我们后面发送请求是将这个<code>formData</code>发送出去</p>
+<h2 id="3、确认按钮事件（前半段）"><a href="#3、确认按钮事件（前半段）" class="headerlink" title="3、确认按钮事件（前半段）"></a>3、确认按钮事件（前半段）</h2><p>这里的确认事件做了两件事：<br><br>1）初始化定义<code>formData</code><br><br>2）调用了<code>upload</code>的<code>submit</code>方法<br><br><strong>注意：</strong> 这里的<code>this.$refs.upload.submit() </code>如果我们不做修改的话（不在<code>&lt;el-upload&gt;</code>里面定义<code>http-request</code>属性），它默认是选中文件立即上传。所以，我们这里添加<code>:http-request=&quot;uploadFile&quot;</code>，我们自己写一个<code>uploadFile</code>方法覆盖它的默认上传行为。不让它立即上传而是最后一起上传。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">onSubmit</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.formDate = <span class="keyword">new</span> FormData() <span class="comment">//初始化定义</span></span><br><span class="line">    <span class="built_in">this</span>.$refs.upload.submit() </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4、uploadFile覆盖默认上传行为"><a href="#4、uploadFile覆盖默认上传行为" class="headerlink" title="4、uploadFile覆盖默认上传行为"></a>4、uploadFile覆盖默认上传行为</h2><p>upload组件会根据fileLIst遍历，即有多少文件，就会执行多少次<code>this.$refs.upload.submit() </code>。它在每次执行<code>this.$refs.upload.submit() </code>后，就会调用<code>uploadFile()</code>方法（我们所写的覆盖方法），并且会传入一个file参数。这个时候我们就将每次传来的file通过append()到formData载体里面。这样，后面我们就可以将载体formData直接作为参数传给服务端。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">uploadFile</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//参数file文件就是传入的文件流，添加进formDate中</span></span><br><span class="line">    <span class="built_in">this</span>.formDate.append(<span class="string">&#x27;files&#x27;</span>, file.file)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="5、-确认按钮事件（后半段）"><a href="#5、-确认按钮事件（后半段）" class="headerlink" title="5、 确认按钮事件（后半段）"></a>5、 确认按钮事件（后半段）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="title">onSubmit</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.formDate = <span class="keyword">new</span> FormData() <span class="comment">//初始化定义</span></span><br><span class="line">    <span class="built_in">this</span>.$refs.upload.submit() <span class="comment">//内部会循环submit，有多少文件就循环几次，每次submit会执行uploadFile方法</span></span><br><span class="line">    <span class="comment">//submit了之后就可以直接将formData当作参数传给服务器</span></span><br><span class="line">    <span class="comment">//我这里是一个调用api的例子，根据你们实际接口来</span></span><br><span class="line">    <span class="keyword">await</span> uploadDataApi(<span class="built_in">this</span>.formDate).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(res.code === <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.$message(&#123;</span><br><span class="line">                <span class="attr">message</span>: <span class="string">&#x27;上传成功&#x27;</span>,</span><br><span class="line">                <span class="attr">type</span>: <span class="string">&#x27;success&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>submit了之后调用接口直接将formData作为参数调用接口就完成啦。<br><br>如果有疑问或者哪里说的不对的欢迎评论区指出</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E4%BB%8Eupload%E7%BB%84%E4%BB%B6copy%E4%B8%8B%E6%9D%A5%E4%BF%AE%E6%94%B9%E4%B8%80%E4%B8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1、从upload组件copy下来修改一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81data%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">2、data中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E7%A1%AE%E8%AE%A4%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6%EF%BC%88%E5%89%8D%E5%8D%8A%E6%AE%B5%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">3、确认按钮事件（前半段）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81uploadFile%E8%A6%86%E7%9B%96%E9%BB%98%E8%AE%A4%E4%B8%8A%E4%BC%A0%E8%A1%8C%E4%B8%BA"><span class="toc-number">1.4.</span> <span class="toc-text">4、uploadFile覆盖默认上传行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81-%E7%A1%AE%E8%AE%A4%E6%8C%89%E9%92%AE%E4%BA%8B%E4%BB%B6%EF%BC%88%E5%90%8E%E5%8D%8A%E6%AE%B5%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">5、 确认按钮事件（后半段）</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/07/20/test/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/07/20/test/&text=test"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/07/20/test/&is_video=false&description=test"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=test&body=Check out this article: http://example.com/2023/07/20/test/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/07/20/test/&title=test"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/07/20/test/&name=test&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/07/20/test/&t=test"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Yado
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
